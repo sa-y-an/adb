@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const CreateTodo = () => {
   const [todo, setTodo] = useState('');
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +17,11 @@ const CreateTodo = () => {
       body: JSON.stringify(newTodo)
     }).then(() => {
       window.location.reload();
+    })
+    .catch(err => {
+      // auto catches network / connection error
+      setIsPending(false);
+      setError(err.message);
     })
   }
 
@@ -32,7 +40,9 @@ const CreateTodo = () => {
             />
           </div>
           <div style={{"marginTop": "5px"}}>
-            <button>Add Todo</button>
+            { !isPending && <button>Add Todo</button>}
+            { isPending && <button disabled>Adding Todo ...</button>}
+            { error && <div>{ error }</div> }
           </div>
         </form>
       </div>
