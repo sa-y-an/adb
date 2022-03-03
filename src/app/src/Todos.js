@@ -6,15 +6,14 @@ const Todos = ({todos,title}) => {
             {title}
         </h2>
         <div>
-            <ul>
-                {
-                    todos.map( (todo) => {
-                        <li>
+            <div>
+                {   todos.map( (todo) => (
+                        <p key = {todo._id}>
                             {todo.todo}
-                        </li>
-                    } )
+                        </p>
+                 ))
                 }
-            </ul>
+            </div>
         </div>
     </div> );
 }
