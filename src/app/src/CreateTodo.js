@@ -2,6 +2,8 @@ import { useState } from "react";
 
 const CreateTodo = () => {
   const [todo, setTodo] = useState('');
+  // const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = { todo };
@@ -12,7 +14,7 @@ const CreateTodo = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTodo)
     }).then(() => {
-      console.log('new todo added');
+      window.location.reload();
     })
   }
 
