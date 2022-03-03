@@ -21,12 +21,12 @@ class TodoListView(APIView):
 
     def get(self, request):
         # Implement this method - return all todo items from db instance above.
-        ret = []
+        todoItems = []
         data = collection.find({})
-        for res in data :
-            ret.append(res)
-        lst = TodoSerializer(ret, many=True)
-        return Response(lst.data, status=status.HTTP_200_OK)
+        for item in data :
+            todoItems.append(item)
+        serializedItems = TodoSerializer(todoItems, many=True)
+        return Response(serializedItems.data, status=status.HTTP_200_OK)
         
     def post(self, request):
         # Implement this method - accept a todo item in a mongo collection, persist it using db instance above.
