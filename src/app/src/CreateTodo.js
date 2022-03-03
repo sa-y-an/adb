@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const CreateTodo = () => {
   const [todo, setTodo] = useState('');
-  // const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
