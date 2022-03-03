@@ -1,13 +1,37 @@
+import { useState } from "react";
+
 const CreateTodo = () => {
+  const [todo, setTodo] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTodo = { todo };
+    console.log(JSON.stringify(newTodo))
+
+    fetch('http://localhost:8000/todos/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTodo)
+    }).then(() => {
+      console.log('new todo added');
+    })
+  }
+
+
     return ( <div>
       <div>
-        <form>
+
+        <form onSubmit={handleSubmit}>
           <div>
             <label for="todo">ToDo: </label>
-            <input type="text" />
+            <input 
+            type="text"
+            required
+            value={todo}
+            onChange={(e) => setTodo(e.target.value)}  
+            />
           </div>
           <div style={{"marginTop": "5px"}}>
-            <button>Add ToDo!</button>
+            <button>Add Todo</button>
           </div>
         </form>
       </div>
